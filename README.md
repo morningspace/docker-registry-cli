@@ -3,16 +3,16 @@
 **Docker Registry CLI** is a command line utility written in *Bash Shell* for easy and flexible manipulation of Docker registry that supports [V2 API](https://docs.docker.com/registry/spec/api/).
 
 ## Table of Contents
-* [Why It is Different?](#why-it-is-different?)
+* [Why It is Different](#why-it-is-different)
   * [Easy to Learn and Use](#easy-to-learn-and-use)
   * [Flexible and Powerful](#flexible-and-powerful)
   * [Setup Registry Easily](#setup-registry-easily)
   * [Run as Docker-in-Docker](#run-as-docker-in-docker)
-* [How to Run?](#how-to-run?)
+* [How to Run](#how-to-run)
   * [Inside Docker Container](#inside-docker-container)
   * [From GitHub Repository](#from-github-repository)
   * [Outside Docker Container](#outside-docker-container)
-* [How to Use?](#how-to-use?)
+* [How to Use](#how-to-use)
   * [Copy Images between Registries](#copy-images-between-registries)
   * [List Images and More](#list-images-and-more)
   * [Remove Images and Tags](#remove-images-and-tags)
@@ -22,13 +22,13 @@
   * [Alternatives](#alternatives)
 * [Contact](#contact)
 
-## Why It is Different?
+## Why It is Different
 
 ### Easy to Learn and Use
 The design rationale behind Docker Registry CLI is to reference existing linux commands syntax as much as possible. So, it's fairly **easy** to learn and use if you are familiar with some ordinary linux commands such as `ls`, `rm`, `cp`.
 
 ### Flexible and Powerful
-With the combination of a very little set of commands, options and arguments, it provides very **flexible** and **powerful** features to manipulate the registry. See [How to Use?](#how-to-use?) for details.
+With the combination of a very little set of commands, options and arguments, it provides very **flexible** and **powerful** features to manipulate the registry. See [How to Use](#how-to-use) for details.
 
 ### Setup Registry Easily
 
@@ -38,7 +38,7 @@ The `cli cp` command used to copy images between registries is one of the outsta
 
 The cli can be run in Docker container and it provides a Docker image based on [DIND(Docker-in-Docker)](https://github.com/jpetazzo/dind) where you can run `cli cp` in container to pull images from source registries then push to target registry without polluting the local images registry on your host machine. After you destroy the container, nothing will be left on your host machine.
 
-## How to Run?
+## How to Run
 
 Docker Registry CLI can be run both inside and outside Docker container.
 
@@ -86,7 +86,7 @@ docker-compose exec registry-cli bash
 
 To run outside container, you need to install its dependencies at first. See [Dependencies](#dependencies) for details.
 
-## How to Use?
+## How to Use
 
 Run `reg-cli` inside container or `reg-cli.sh` outside container, it gives you help information including the usage syntax and examples.
 
@@ -217,7 +217,7 @@ The cli needs `bash`, `curl`, `jq` to be installed as its dependencies. You may 
 
 ### Alternatives
 
-There are other alternatives that can be found at GitHub. Mostly written in `GO` or `Python`. See [Why It is Different?](#why-it-is-different?) to understand why the cli is different from those alternatives.
+There are other alternatives that can be found at GitHub. Mostly written in `GO` or `Python`. See [Why It is Different](#why-it-is-different) to understand why the cli is different from those alternatives.
 
 ## Contact
 
