@@ -164,7 +164,8 @@ copy_images() {
     if [[ $image =~ / ]] ; then
       copy_image_tags $image $reg
     # is registry
-    else
+    elif [[ ! $registries =~ $image ]] ; then
+      registries+=($image)
       more=($(read_image_list $image))
       [ ${#more[@]} -ne 0 ] && copy_images ${more[@]} $reg
     fi
@@ -220,7 +221,7 @@ usage() {
 
 script=${0##*/}
 home=$(find_home)
-images=()
+registries=()
 
 case "$1" in
   "ls") list_images ${@:2} ;;
