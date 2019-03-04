@@ -108,7 +108,7 @@ When specify registry instead of image, it can even copy all configured images w
 reg-cli cp morningspace mr.io
 ```
 
-Moreoever, the `.list` files can be organized in a nested manner, where entries defined in `.list` file can also be registries. The cli will parse `.list` files recursively. See `.list` sample files distributed along with the cli in folder `/samples/registries`.
+Moreover, the `.list` files can be organized in a nested manner, where entries defined in `.list` file can also be registries. The cli will parse `.list` files recursively. See `.list` sample files distributed along with the cli in folder `/samples/registries`.
 
 ### List images and more
 
@@ -192,7 +192,7 @@ reg-cli rm -f mr.io/alpine:latest
 
 ## Something else you may need to know
 
-* **Enable image deletion**: Before run the `cli rm` command, make sure you have enabled `image deletion` on the registry. Otherwise, you may get 405 Error when run the command. This can be configured by either defining environment variable `REGISTRY_STORAGE_DELETE_ENABLED` to be `"true"` or adding corresponding configuration option to`config.yml` on the registry. See "[Docker Registry Configuration](https://docs.docker.com/registry/configuration/#delete)" for details.
+* **Enable image deletion**: Before run the `cli rm` command, make sure you have enabled `image deletion` on the registry. Otherwise, you may get 405 Error when run the command. This can be configured by either defining environment variable `REGISTRY_STORAGE_DELETE_ENABLED` to be `"true"` or adding corresponding configuration option to `config.yml` on the registry. See "[Docker Registry Configuration](https://docs.docker.com/registry/configuration/#delete)" for details.
 
 * **Dependencies**: The cli needs `bash`, `curl`, `jq` to be installed as its dependencies. You may need to install some of them by yourself if run outside container and they do not exist.
 
