@@ -3,33 +3,33 @@
 Docker Registry CLI is a command line utility written in Bash Shell for easy and flexible manipulation of Docker registry that supports [V2 API](https://docs.docker.com/registry/spec/api/).
 
 ## Table of Contents
-* [Why It is Different](#why-it-is-different)
-* [How to Run](#how-to-run)
-  * [Inside Docker Container](#inside-docker-container)
-  * [From GitHub Repository](#from-github-repository)
-  * [Outside Docker Container](#outside-docker-container)
-* [How to Use](#how-to-use)
-  * [Copy Images between Registries](#copy-images-between-registries)
-  * [List Images and More](#list-images-and-more)
-  * [Remove Images and Tags](#remove-images-and-tags)
-* [Others You May Need to Know](#others-you-may-need-to-know)
+* [Why it is different](#why-it-is-different)
+* [How to run](#how-to-run)
+  * [Inside Docker container](#inside-docker-container)
+  * [From GitHub repository](#from-github-repository)
+  * [Outside Docker container](#outside-docker-container)
+* [How to use](#how-to-use)
+  * [Copy images between registries](#copy-images-between-registries)
+  * [List images and more](#list-images-and-more)
+  * [Remove images and tags](#remove-images-and-tags)
+* [Others you may need to know](#others-you-may-need-to-know)
 * [Contact](#contact)
 
-## Why It is Different
+## Why it is different
 
 * **Easy to learn and use** The design rationale behind Docker Registry CLI is to reference existing linux commands syntax as much as possible. So, it's fairly **easy** to learn and use if you are familiar with some ordinary linux commands such as `ls`, `rm`, `cp`.
 
-* **Flexible and powerful** With the combination of a very little set of commands, options and arguments, it provides very **flexible** and **powerful** features to manipulate the registry. See [How to Use](#how-to-use) for details.
+* **Flexible and powerful** With the combination of a very little set of commands, options and arguments, it provides very **flexible** and **powerful** features to manipulate the registry. See [How to use](#how-to-use) for details.
 
 * **Setup registry easily** The `cli cp` command used to copy images between registries is one of the outstanding features that can be used to setup a private registry easily where the images come from multiple sources, including both public registries such as Docker Hub and other private registries.
 
 * **Run as Docker-in-Docker** The cli can be run in Docker container and it provides a Docker image based on [DIND(Docker-in-Docker)](https://github.com/jpetazzo/dind) where you can run `cli cp` in container to pull images from source registries then push to target registry without polluting the local images registry on your host machine. After you destroy the container, nothing will be left on your host machine.
 
-## How to Run
+## How to run
 
 Docker Registry CLI can be run both inside and outside Docker container.
 
-### Inside Docker Container
+### Inside Docker container
 
 It's much easier to run inside container since it has all dependencies installed and a soft link created for the shell script so that you can run the cli anywhere.
 
@@ -53,7 +53,7 @@ And connect to it from another container to run the cli:
 docker exec -it reg-cli bash
 ```
 
-### From GitHub Repository
+### From GitHub repository
 
 You can clone the [GitHub repository](https://github.com/morningspace/docker-registry-cli) directly to your local to run the cli. It has docker-compose YAML file and some sample configurations distributed along with the cli.
 
@@ -69,15 +69,15 @@ Then connect to the daemon from another container to run the cli:
 docker-compose exec registry-cli bash
 ```
 
-### Outside Docker Container
+### Outside Docker container
 
 To run outside container, you need to install its dependencies at first. See [Dependencies](#dependencies) for details.
 
-## How to Use
+## How to use
 
 Run `reg-cli` inside container or `reg-cli.sh` outside container, it gives you help information including the usage syntax and examples.
 
-### Copy Images between Registries
+### Copy images between registries
 
 Just like the linux `cp` command to copy directories and files, to copy image and its tags between registries, all can be done by `cli cp` command.
 
@@ -110,7 +110,7 @@ reg-cli cp morningspace mr.io
 
 Moreoever, registry .list files can be organized in a nested manner, where the entry in .list file can be a registry name. The cli will parse .list files recursively. See .list sample files distributed along with the cli in `/samples/registries` folder.
 
-### List Images and More
+### List images and more
 
 Just like the linux `ls` command to list directories and files, to list registry catalog, image tags, digests and manifests, all can be done by `cli ls` command.
 
@@ -159,7 +159,7 @@ reg-cli ls mr.io -ld
 reg-cli ls mr.io -lm | less
 ```
 
-### Remove Images and Tags
+### Remove images and tags
 
 Just like the linux `rm` command to remove directories or files, to remove image and its tags, all can be done by `cli rm` command.
 
@@ -190,13 +190,13 @@ And, use `-f` to avoid the user prompt:
 reg-cli rm -f mr.io/alpine:latest
 ```
 
-## Others You May Need to Know
+## Others you may need to know
 
 * **Enable image deletion** Before run the `cli rm` command, make sure you have enabled `image deletion` on the registry. Otherwise, you may get 405 Error when run the command. This can be configured by either defining environment variable `REGISTRY_STORAGE_DELETE_ENABLED` to be `"true"` or adding configuration option to the `config.ym`l on the registry. See [Docker Registry Configuration](https://docs.docker.com/registry/configuration/#delete) for details.
 
 * **Dependencies** The cli needs `bash`, `curl`, `jq` to be installed as its dependencies. You may need to install them by yourself if run outside container.
 
-* **Alternatives** There are other alternatives that can be found at GitHub. Mostly written in `GO` or `Python`. See [Why It is Different](#why-it-is-different) to understand why the cli is different from those alternatives.
+* **Alternatives** There are other alternatives that can be found at GitHub. Mostly written in `GO` or `Python`. See [Why it is different](#why-it-is-different) to understand why the cli is different from those alternatives.
 
 ## Contact
 
