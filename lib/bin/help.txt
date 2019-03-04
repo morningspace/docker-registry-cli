@@ -1,0 +1,53 @@
+
+Docker Registry CLI
+
+Usage: @@script COMMAND [OPTIONS] [ARGS]
+
+Commands:
+  ls [-lt|-ld|-lm] <img:tag1,tag2,...> ...  list images and their details
+  rm [-f] <img:tag1,tag2,...> ...           remove images with their tags
+  cp <img:tag1,tag2,...> ... <reg>          copy images between registries
+
+Options:
+  -lt   display tags
+  -ld   display digests
+  -lm   display manifests
+  -f    force to remove without prompt
+
+Examples:
+  # copy an image with a tag to a registry
+  @@script cp morningspace/lab-web:1.0 mr.io
+  # copy an image with multiple tags to a registry
+  @@script cp morningspace/lab-web:1.0,latest mr.io
+  # copy an image with latest tag to a registry
+  @@script cp morningspace/lab-web mr.io
+  # copy multiple images to a registry
+  @@script cp morningspace/lab-web morningspace/lab-lb mr.io
+  # copy images to a registry by reading morningspace.list file
+  @@script cp morningspace mr.io
+
+  # list all tags for an image
+  @@script ls mr.io/alpine
+  # list digests for all tags of an image
+  @@script ls -ld mr.io/alpine
+  # list manifest for a tag of an image
+  @@script ls -lm mr.io/alpine:latest
+  # list tags for multiple images
+  @@script ls mr.io/alpine mr.io/busybox
+  # list all images on a registry
+  @@script ls mr.io
+  # list tags for all images on a registry
+  @@script ls mr.io -lt
+
+  # remove a tag for an image
+  @@script rm mr.io/alpine:latest
+  # remove multiple tags for an image
+  @@script rm mr.io/alpine:3.9,latest
+  # remove all tags for one image
+  @@script rm mr.io/alpine
+  # remove tags for multiple images
+  @@script rm mr.io/alpine:3.9 mr.io/busybox
+  # force remove
+  @@script rm -f mr.io/alpine:latest
+------------------------------------------------------------------------------
+Learn more @ https://github.com/morningspace/docker-registry-cli

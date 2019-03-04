@@ -1,0 +1,37 @@
+version: '3.5'
+
+services:
+
+  mr.io:
+    image: registry:2
+    hostname: mr.io
+    container_name: mr.io
+    environment:
+      REGISTRY_HTTP_ADDR: 0.0.0.0:80
+      REGISTRY_STORAGE_DELETE_ENABLED: "true"
+    ports:
+      - "5000:80"
+    volumes:
+      - vol-mr.io:/var/lib/registry
+    networks:
+      - net-registry
+
+  reg-cli:
+    build:
+      context: .
+    image: morningspace/docker-registry-cli
+    privileged: true
+    volumes:
+      - ./samples/etc/docker/daemon.json:/etc/docker/daemon.json
+      - ./samples/registries:/root/registries
+    networks:
+      - net-registry
+
+volumes:
+  vol-mr.io:
+    name: vol-mr.io
+
+networks:
+  net-registry:
+    name: net-registry
+    driver: bridge

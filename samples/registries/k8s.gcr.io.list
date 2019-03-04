@@ -1,0 +1,5 @@
+k8s.gcr.io/pause:3.1
+k8s.gcr.io/etcd:3.2.24
+k8s.gcr.io/coredns:1.2.6
+k8s.gcr.io/hyperkube:v1.12.1,v1.13.0
+k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1
