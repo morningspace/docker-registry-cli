@@ -3,37 +3,34 @@
 Docker Registry CLI is a command line utility written in Bash Shell for easy and flexible manipulation of Docker registry that supports [V2 API](https://docs.docker.com/registry/spec/api/).
 
 ## Table of Contents
-* [Why it is different](#why-it-is-different)
-* [How to run](#how-to-run)
-  * [Inside Docker container](#inside-docker-container)
-  * [From GitHub repository](#from-github-repository)
-  * [Outside Docker container](#outside-docker-container)
-* [How to use](#how-to-use)
-  * [Copy images between registries](#copy-images-between-registries)
-  * [List images and more](#list-images-and-more)
-  * [Remove images and tags](#remove-images-and-tags)
-* [Something else you may need to know](#something-else-you-may-need-to-know)
+* [Why Different](#why-different)
+* [How to Run](#how-to-run)
+  * [Inside Container](#inside-container)
+  * [From Git Repository](#from-git-repository)
+  * [Outside container](#outside-container)
+* [How to Use](#how-to-use)
+  * [Copy Images between Registries](#copy-images-between-registries)
+  * [List images and More](#list-images-and-more)
+  * [Remove Images and Tags](#remove-images-and-tags)
+* [Notes](#notes)
 * [Contact](#contact)
 
-## Why it is different
+## Why Different
 
-* **Easy to learn and use**: The design rationale behind Docker Registry CLI is to reference existing linux command syntax as much as possible. So, it's fairly easy to learn and use if you are familiar with some ordinary linux commands such as `ls`, `rm`, `cp`.
+* *Copy in batch*: To copy images in batch is one interesting feature provided by the cli. It can be used to copy multiple images from different sources including both private and public registries to the target registry so that you can setup your own private registry easily.
+* *Based on DIND*: The cli provides a Docker image based on [DIND(Docker-in-Docker)](https://github.com/jpetazzo/dind). By using DIND, not only the cli can be run inside container, it can even run docker commands in container without polluting the local registry cache on your host machine.
+* *Less is more*: With the combination of a very little set of commands and options, it provides quite a few features to manipulate the registry. See "[How to Use](#how-to-use)" for details.
+* *Easy to use*: The design rationale behind the cli is to reference existing linux command syntax as much as possible. So, it's fairly easy to learn and use if you are familiar with some ordinary linux commands such as `ls`, `rm`, and `cp`.
 
-* **Flexible and powerful**: With the combination of a very little set of commands, options and arguments, it provides very flexible and powerful features to manipulate the registry. See "[How to use](#how-to-use)" for details.
-
-* **Setup registry easily**: The `cli cp` command used to copy images between registries is one outstanding feature that can be used to setup private registry easily where images can come from multiple sources, including private registries or public registries such as Docker Hub.
-
-* **Run as Docker-in-Docker**: The cli provides a Docker image based on [DIND(Docker-in-Docker)](https://github.com/jpetazzo/dind) where you can run `cli cp` in container to pull images from source registries then push to target registry without polluting local image registry on your host machine. After destroy the container, nothing will be left on your host machine.
-
-## How to run
+## How to Run
 
 Docker Registry CLI can be run both inside and outside Docker container.
 
-### Inside Docker container
+### Inside Container
 
-It's much easier to run inside container since it has all dependencies installed and a soft link created for the shell script so that you can run the cli anywhere in container.
+It's much easier to run inside container since it has all dependencies installed and a soft link created for the shell script so that you can run the cli from anywhere in container.
 
-Another advantage to run inside container is that it won't pollute your local image registry on your host machine when run `cli cp` command to copy images between registries, because the dockerized cli is based on [DIND(Docker-in-Docker)](https://github.com/jpetazzo/dind) and can run `docker` commands inside container that are needed by `cli cp`.
+Another advantage to run inside container is that it won't pollute the local registry cache on your host machine when run the cli copy command to copy images between registries, because the dockerized cli is based on [DIND(Docker-in-Docker)](https://github.com/jpetazzo/dind). If you exist the container after get the work done, nothing will be left.
 
 The cli has been built as a Docker image and published to [Docker Hub](https://cloud.docker.com/u/morningspace/repository/docker/morningspace/docker-registry-cli). You can run below command to pull it to your local machine:
 
@@ -53,9 +50,9 @@ And connect to it from another container to run the cli:
 docker exec -it reg-cli bash
 ```
 
-### From GitHub repository
+### From Git Repository
 
-You can clone the [GitHub repository](https://github.com/morningspace/docker-registry-cli) directly to your local to run the cli. There are docker-compose YAML file and some sample configurations distributed along with the cli.
+You can clone the [Git repository](https://github.com/morningspace/docker-registry-cli) directly to your local to run the cli. There are docker-compose YAML file and some sample configurations distributed along with the cli.
 
 To try it out, run docker-compose as below to launch the daemon and a sample private registry `mr.io` for your testing:
 
@@ -69,17 +66,17 @@ Then connect to the daemon from another container to run the cli:
 docker-compose exec registry-cli bash
 ```
 
-### Outside Docker container
+### Outside Container
 
 To run outside container, you need to install its dependencies at first. See "[Dependencies](#dependencies)" for details.
 
-## How to use
+## How to Use
 
 Run `reg-cli` inside container or `reg-cli.sh` outside container, it will give you help information by default including the usage syntax and examples.
 
-### Copy images between registries
+### Copy Images between Registries
 
-Just like the linux `cp` command to copy directories and files, to copy one or more images and tags between registries, all can be done by `cli cp` command.
+Just like the linux `cp` command to copy directories and files, to copy one or more images and tags between registries, all can be done by `reg-cli cp` command.
 
 When specify an image with one or more tags separated by comma, it can copy one or more images with their tags to target registry. Without specifying any tag, it will copy the image with `latest` tag. The source registries can be private registries or public registries such as Docker Hub:
 
@@ -110,9 +107,9 @@ reg-cli cp morningspace mr.io
 
 Moreover, the `.list` files can be organized in a nested manner, where entries defined in `.list` file can also be registries. The cli will parse `.list` files recursively. See `.list` sample files distributed along with the cli in folder `/samples/registries`.
 
-### List images and more
+### List Images and More
 
-Just like the linux `ls` command to list directories and files, to list registry catalog, image tags, digests and manifests, all can be done by `cli ls` command.
+Just like the linux `ls` command to list directories and files, to list registry catalog, image tags, digests and manifests, all can be done by `reg-cli ls` command.
 
 When specify an image, it lists tags for that image by default(or using `-lt`). It can also list digests using `-ld`, or manifest using `-lm`. Here are some examples:
 
@@ -159,11 +156,11 @@ reg-cli ls mr.io -ld
 reg-cli ls mr.io -lm | less
 ```
 
-### Remove images and tags
+### Remove Images and Tags
 
-Just like the linux `rm` command to remove directories or files, to remove one or more images and tags, all can be done by `cli rm` command.
+Just like the linux `rm` command to remove directories or files, to remove one or more images and tags, all can be done by `reg-cli rm` command.
 
-When specify an image with one ore more tags separated by comma, it can remove one or more tags of that image. Without specifying any tag, it will remove all tags for that image:
+When specify an image with one or more tags separated by comma, it can remove one or more tags of that image. Without specifying any tag, it will remove all tags for that image:
 
 ```shell
 # remove a tag for an image
@@ -190,13 +187,13 @@ And, use `-f` to enforce removal without user prompt:
 reg-cli rm -f mr.io/alpine:latest
 ```
 
-## Something else you may need to know
+## Notes
 
-* **Enable image deletion**: Before run the `cli rm` command, make sure you have enabled `image deletion` on the registry. Otherwise, you may get 405 Error when run the command. This can be configured by either defining environment variable `REGISTRY_STORAGE_DELETE_ENABLED` to be `"true"` or adding corresponding configuration option to `config.yml` on the registry. See "[Docker Registry Configuration](https://docs.docker.com/registry/configuration/#delete)" for details.
+* *Enable image deletion*: Before run the `reg-cli rm` command, make sure you have enabled `image deletion` on the registry. Otherwise, you may get 405 Error when run the command. This can be configured by either defining environment variable `REGISTRY_STORAGE_DELETE_ENABLED` to be `"true"` or adding corresponding configuration option to `config.yml` on the registry. See [here](https://docs.docker.com/registry/configuration/#delete) for details.
 
-* **Dependencies**: The cli needs `bash`, `curl`, `jq` to be installed as its dependencies. You may need to install some of them by yourself if run outside container and they do not exist.
+* *Dependencies*: The cli needs `bash`, `curl`, `jq`, `docker` to be installed as its dependencies. You may need to install some of them by yourself if run outside container and they do not exist.
 
-* **Alternatives**: There are [other alternatives](https://github.com/search?q=docker+registry+cli&type=Repositories) that can be found on GitHub. Most of them are written in `Go` or `Python`. See "[Why it is different](#why-it-is-different)" to understand why Docker Registry CLI is different from them.
+* *Alternatives*: There are [other alternatives](https://github.com/search?q=docker+registry+cli&type=Repositories) that can be found on GitHub. Most of them are written in `Go` or `Python`. See "[Why Different](#why-it-is-different)" to understand why Docker Registry CLI is different from others.
 
 ## Contact
 
