@@ -2,6 +2,15 @@
 
 Docker Registry CLI is a command line utility written in Bash Shell for easy and flexible manipulation of Docker registry that supports [V2 API](https://docs.docker.com/registry/spec/api/).
 
+You can also watch the tutorial **"Docker Registry CLI Tutorial"** video series on [YouTube](https://www.youtube.com/watch?v=j_Bd4G5aGXA&list=PLVQM6jLkNkfomYfooLTUmbaNlImMHkDTE) or [YouKu](https://v.youku.com/v_show/id_XNDE3ODk0NTk4MA==.html?f=52175776). Or, read the corresponding posts on [晴耕小筑](https://morningspace.github.io/tags/#studio-reg-cli).
+
+| Title | Links
+| ---- 	|:----
+| Docker Registry CLI Tutorial - Basic Use | [Post](https://morningspace.github.io/tech/reg-cli-tutorial-1/) [YouTube](https://youtu.be/j_Bd4G5aGXA) [YouKu](https://v.youku.com/v_show/id_XNDE3ODk0NTk4MA==.html?f=52175776)
+| Docker Registry CLI Tutorial - More Use  | [Post](https://morningspace.github.io/tech/reg-cli-tutorial-2/) [YouTube](https://youtu.be/wySn3fvtmdE) [YouKu](https://v.youku.com/v_show/id_XNDE5Nzk2OTA3Mg==.html?f=52175776)
+| Docker Registry CLI轻松管理Docker注册表(上) | [文章](https://morningspace.github.io/tech/use-docker-reg-cli-1/)
+| Docker Registry CLI轻松管理Docker注册表(下) | [文章](https://morningspace.github.io/tech/use-docker-reg-cli-2/)
+
 ## Table of Contents
 * [Why Different](#why-different)
 * [How to Run](#how-to-run)
