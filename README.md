@@ -2,7 +2,7 @@
 
 Docker Registry CLI is a command line utility written in Bash Shell for easy and flexible manipulation of Docker registry that supports [V2 API](https://docs.docker.com/registry/spec/api/).
 
-You can also watch the tutorial **"Docker Registry CLI Tutorial"** video series on [YouTube](https://www.youtube.com/watch?v=j_Bd4G5aGXA&list=PLVQM6jLkNkfomYfooLTUmbaNlImMHkDTE) or [YouKu](https://v.youku.com/v_show/id_XNDE3ODk0NTk4MA==.html?f=52175776). Or, read the corresponding posts on [晴耕小筑](https://morningspace.github.io/tags/#studio-reg-cli).
+You can watch the tutorial **"Docker Registry CLI Tutorial"** video series on [YouTube](https://www.youtube.com/watch?v=j_Bd4G5aGXA&list=PLVQM6jLkNkfomYfooLTUmbaNlImMHkDTE) or [YouKu](https://v.youku.com/v_show/id_XNDE3ODk0NTk4MA==.html?f=52175776). Or, read the corresponding posts on [晴耕小筑](https://morningspace.github.io/tags/#studio-reg-cli).
 
 | Title | Links
 | ---- 	|:----
